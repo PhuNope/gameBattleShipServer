@@ -1,6 +1,6 @@
 // require("dotenv").config();
 import { config } from "dotenv";
-config();
+config({ path: "config.env" });
 
 
 // const express = require("express");
@@ -11,6 +11,8 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 const PORT = process.env.PORT || 3000;
+
+console.log(process.env.YOU_ARE_HOST);
 
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);

@@ -1,6 +1,6 @@
 import io from "./connect.js";
 import { config } from "dotenv";
-config();
+config({ path: "config.env" });
 
 const dataObj = { data: {} };
 
@@ -12,8 +12,9 @@ let roomStatus = [];
 
 io.on("connection", (socket) => {
     //server thông báo cho clients vừa join
-    data.data = { notify: "system online" };
-    socket.emit(process.env.SERVER_HELLO_CLIENT, data);
+    dataObj.data = { notify: "system online" };
+    console.log(process.env.SERVER_HELLO_CLIENTS);
+    socket.emit(process.env.SERVER_HELLO_CLIENTS, dataObj);
 
     //server nhận tên client
     socket.on(process.env.CLIENT_REGISTER_NAME, (data) => {
