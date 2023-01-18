@@ -1,4 +1,10 @@
 {
+  "name": "gameBattleShipServer",
+  "version": "1.0.0",
+  "main": "index.js",
+  "engines": {
+    "node": "19.x"
+  },
   "dependencies": {
     "@babel/core": "^7.20.12",
     "@babel/node": "^7.20.7",
