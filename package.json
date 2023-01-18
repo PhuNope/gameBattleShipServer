@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "engines": {
-    "node": "19.x"
+    "node": "18.x"
   },
   "dependencies": {
     "@babel/core": "^7.20.12",
