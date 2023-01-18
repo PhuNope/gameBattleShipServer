@@ -80,6 +80,6 @@ io.on("connection", (socket) => {
     //Gửi lên server hết tàu
     socket.on(process.env.DIE_ALL_SHIP, (data) => {
         //gửi thông báo người win
-        io.to(data.data.roomName).emit(process.env.WIN_GAME, dataObj);
+        io.to(data.data.roomName).emit(process.env.WIN_GAME, data);
     });
 });
