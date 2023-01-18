@@ -7,7 +7,6 @@ const dataObj = { data: {} };
 let clientNo = 0;
 let roomNo;
 let hostName;
-let playerName;
 let roomStatus = [];
 
 io.on("connection", (socket) => {
@@ -18,21 +17,22 @@ io.on("connection", (socket) => {
 
     //server nhận tên client
     socket.on(process.env.CLIENT_REGISTER_NAME, (data) => {
-        playerName = data.data.playerName;
         clientNo++;
         if (clientNo % 2 != 0) {
             roomNo = socket.id;
-            hostName = dataObj.data.playerName;
             socket.join(roomNo);
-            data.data = { roomName: roomNo };
+            hostName = data.data.playerName;
+
+            dataObj.data = { roomName: socket.id, hostName: data.data.playerName };
 
             roomStatus[roomNo] = 0;
             //server gửi thông báo room host cho clients
-            socket.emit(process.env.YOU_ARE_HOST, data);
+            socket.emit(process.env.YOU_ARE_HOST, dataObj);
         } else {
             socket.join(roomNo);
 
-            dataObj.data = { hostName: hostName, playerName, roomName: roomNo };
+            dataObj.data = { hostName: hostName, playerName: data.data.playerName, roomName: roomNo };
+
             //server gửi thông tin phòng cho người chơi
             io.to(roomNo).emit(process.env.ALL_CLIENTS_IN_ROOM, dataObj);
         }
